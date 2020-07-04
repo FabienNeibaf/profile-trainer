@@ -1,24 +1,22 @@
-# README
+# ProMatch
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a web app that creates a marketplace for companies that want to hire professionals.
 
-Things you may want to cover:
+# Technologies
+## Frontend
+- React
+- Redux
+- Appollo 
 
-* Ruby version
+## Backend
+- Rails
+- Devise Token Auth for authentication
+- Figaro for env variables management
 
-* System dependencies
 
-* Configuration
+## Deployment
+- Heroku for hosting
+- Foreman
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Author
+- Fabien RAKOTOMAMPIANDRA
