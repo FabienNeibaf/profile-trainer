@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Header = ({ className }) => (
   <header className={className}>
-    <h1><Link to="/">ProMatch</Link></h1>
+    <h1><Link to="/">Kinga</Link></h1>
     <nav>
       <ul>
         <li>
