@@ -1,18 +1,19 @@
-# Kinga
+# Profile Trainer
 
-A web app that allows companies to open a job position and set criteria. Job seakers can apply for multiple opened position and get in real time how strong their application are compared to others. The app automatically scans all the applications to find the greatest match and alert the interested company when the targeted number is reached.
+A web app that allows users to open a job position and set criteria. Every users can see and apply to opened positions to see how strong are his profile compared to other applicants. The app automatically scans all the applications to find the greatest match and give insight to failed applicants where they can improve.
 
 # Technologies
 ## Frontend
 - React
 - Redux
-- Appollo 
 
 ## Backend
 - Rails
 - Devise Token Auth for authentication
-- Figaro for env variables management
+- Figaro and dotenv for env variables management
 
+## Containerization
+- Docker
 
 ## Deployment
 - Heroku for hosting
