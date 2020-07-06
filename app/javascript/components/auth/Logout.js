@@ -1,10 +1,8 @@
-import React from 'react';
-import { Redirect } from '@reach/router';
+import authApi from '../../apis/auth'
 
 const Logout = () => {
-  return (
-    <Redirect to="/login" noThrow />
-  )
-};
+  authApi.delete('/sign_out')
+  return null
+}
 
-export default Logout;
+export default Logout

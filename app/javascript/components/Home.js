@@ -1,12 +1,9 @@
 import React from 'react';
 
-import AuthGuard from './auth/Guard';
-
 const Home = () => {
   return (
     <section>
-      <AuthGuard />
-      Hello there
+      Hello there!
     </section>
   );
 }

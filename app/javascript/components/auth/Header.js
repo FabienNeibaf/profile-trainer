@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Header = ({ className }) => (
@@ -9,10 +9,10 @@ const Header = ({ className }) => (
     <nav>
       <ul>
         <li>
-          <Link to="/register-client">Join as a Client</Link>
+          <Link to="/login">Sign in</Link>
         </li>
         <li>
-          <Link to="/register-pro">Join as a Pro</Link>
+          <Link to="/register">Register</Link>
         </li>
       </ul>
     </nav>

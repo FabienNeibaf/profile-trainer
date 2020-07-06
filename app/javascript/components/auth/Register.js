@@ -5,18 +5,11 @@ import React, { useState } from 'react';
 import Header from './Header';
 import { validateEmail, validatePassword, matchPassword } from '../../utils';
 
-const RegisterClient = ({ className }) => {
+const Register = ({ className }) => {
   const [state, setState] = useState({
     firstName: '',
     lastName: '',
-    bussiness: '',
-    address: {
-      street: '',
-      city: '',
-      stateProvince: '',
-      code: '',
-      country: '',
-    },
+    job: '',
     email: '',
     password: '',
     passwordConfirmation: '',
@@ -49,7 +42,6 @@ const RegisterClient = ({ className }) => {
     if (!state.password) error.password = 'Password is required';
     if (!state.lastName) error.lastName = 'Last name is required';
     if (!state.firstName) error.firstName = 'First name is required';
-    if (!state.business) error.business = 'First name is required';
 
     if (!error.email && !error.password && !error.lastName &&
       !error.firstName && !error.passwordConfirmation) {
@@ -63,7 +55,7 @@ const RegisterClient = ({ className }) => {
     <section className={className}>
       <Header />
       <form onSubmit={handleSubmit}>
-        <h3>Client Registration</h3>
+        <h3>Create an account</h3>
         <label className="fullName">
           <span>Full Name</span>
           <input type="text" name="firstName" value={state.firstName} onChange={handleChange} placeholder="First Name" />
@@ -71,12 +63,7 @@ const RegisterClient = ({ className }) => {
           <div className="error">{state.error.firstName || state.error.lastName}</div>
         </label>
         <label>
-          <span>Business Name</span>
-          <input type="text" name="lastName" value={state.lastName} onChange={handleChange} />
-          <div className="error">{state.error.bussiness}</div>
-        </label>
-        <label>
-          <span>Address</span>
+          <span>Job Title</span>
           <input type="text" name="job" value={state.job} onChange={handleChange} />
         </label>
         <label>
@@ -90,7 +77,7 @@ const RegisterClient = ({ className }) => {
           <div className="error">{state.error.password}</div>
         </label>
         <label>
-          <span>Confirmation Password</span>
+          <span>Password Confirmation</span>
           <input type="password" name="passwordConfirmation" value={state.passwordConfirmation} onChange={handleChange} />
           <div className="error">{state.error.passwordConfirmation}</div>
         </label>
@@ -103,11 +90,11 @@ const RegisterClient = ({ className }) => {
   );
 };
 
-RegisterClient.propTypes = {
+Register.propTypes = {
   className: PropTypes.string.isRequired,
 }
 
-export default styled(RegisterClient)`
+export default styled(Register)`
   min-height: 100vh;
   background: #f4f4f7;
   border-bottom: 1px solid transparent;

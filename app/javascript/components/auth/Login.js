@@ -1,34 +1,15 @@
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { redirectTo } from '@reach/router'
-import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
 
-import { LOGIN_FAILURE } from '../../types';
-import { authenticate } from '../../actions'
+import { authenticate } from '../../providers/auth'
 
 import Header from './Header'
 import { validateEmail } from '../../utils'
 
-const mapStateToProps = (state) => ({
-  auth: state.auth
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  authenticateUser: (user) => dispatch(authenticate(user))
-})
-
-let Login = ({ className, auth, authenticateUser }) => {
+const Login = ({ className }) => {
   const [state, setState] = useState({email: '', password: '', error: {}})
-
-  useEffect(() => {
-    if (auth.status === LOGIN_FAILURE) {
-      setState((prev) => ({ ...prev, error: { auth: auth.msg }}))
-      setTimeout(() => {
-        setState((prev) => ({ ...prev, error: { ...prev.error, auth: null }}))
-      }, 2000)
-    }
-  }, [auth])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -36,20 +17,28 @@ let Login = ({ className, auth, authenticateUser }) => {
 
     if (name === 'email') {
       error.email = value && !validateEmail(value) ? 'Invalid Email' : ''
+    } else if (name === 'password' && error.password) {
+      error.password = ''
     }
 
+    error.auth = ''
     setState((prev) => ({ ...prev, [name]: value, error }))
   }
 
   const handleSubmit = async (e) => {
-    const { email, password } = state
     e.preventDefault()
-    let authenticated;
-    try {
-      authenticated = authenticateUser({ email, password })
-    } catch(err) {}
-    // if (authenticated) redirectTo('/')
-    // else setState({ email: '', password: '', error: {} })
+    const { email, password, error } = state
+
+    if (!email) error.email = 'Email is required'
+    if (!password) error.password = 'Password is required'
+
+    if (!error.email && !error.password) {
+      const user = await authenticate({ email, password })
+      if (!user) {
+        error.auth = 'Wrong email or password'
+        setState({ email: '', password: '', error })
+      }
+    } else setState((prev) => ({ ...prev, error }))
   }
 
   return (
@@ -66,11 +55,11 @@ let Login = ({ className, auth, authenticateUser }) => {
         <label>
           <span>Password</span>
           <input type="password" name="password" value={state.password} onChange={handleChange} />
+          <div className="error">{state.error.password}</div>
         </label>
         <button type="submit">Sign in</button>
         <div className="register">
-          Don't have an account? <br />
-          Register as a <a href="/register-client">client</a> or a <a href="/register-pro">professional</a>
+          Don't have an account? <Link to="/register">register</Link>
         </div>
       </form>
     </section>
@@ -78,11 +67,8 @@ let Login = ({ className, auth, authenticateUser }) => {
 }
 
 Login.propTypes = {
-  className: PropTypes.string.isRequired,
-  authenticateUser: PropTypes.func.isRequired
+  className: PropTypes.string.isRequired
 }
-
-Login = connect(mapStateToProps, mapDispatchToProps)(Login)
 
 export default styled(Login)`
   min-height: 100vh;
