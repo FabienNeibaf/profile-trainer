@@ -96,8 +96,9 @@ export default styled(Login)`
       font-size: 2em;
       font-weight: 300;
       text-align: center;
-      padding: 10px 20px;
+      padding: 20px 20px 10px;
       margin-bottom: 10px;
+      background: red;
 
       @media (max-width: 500px) {
         font-size: 1.5em;

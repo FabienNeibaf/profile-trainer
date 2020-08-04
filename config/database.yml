@@ -1,6 +1,9 @@
 default: &default
+  host: db
   adapter: postgresql
   encoding: unicode
+  username: postgres
+  password: password
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -14,4 +17,3 @@ test:
 production:
   <<: *default
   database: promatch_production
-  password: <%= ENV['PROMATCH_DATABASE_PASSWORD'] %>
